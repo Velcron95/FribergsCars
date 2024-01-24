@@ -1,0 +1,56 @@
+﻿@page
+@model FribergsCars.Pages.Cars.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Brand
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Available
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Car) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Available)
+            </td>
+            <td>
+                
+                <a asp-page="./Details" asp-route-id="@item.CarId">Details</a> |
+                
+            </td>
+                <td>
+                    <a href="@Url.Page("/Orders/Create", new { carId = item.CarId})">Make a reservation</a>
+
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
