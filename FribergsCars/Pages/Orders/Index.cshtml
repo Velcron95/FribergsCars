@@ -11,46 +11,63 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Orders.FirstOrDefault().StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Orders.FirstOrDefault().EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Orders.FirstOrDefault().Car)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Orders.FirstOrDefault().User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Orders)
-        {
+@if (Model != null)
+{
+    <p>Active orders:</p>
+    <table>
+        <thead>
             <tr>
-                <td>
-                    @item.StartDate.ToString("yyyy-MM-dd")
-                </td>
-                <td>
-                    @item.EndDate.ToString("yyyy-MM-dd")
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Car.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Email)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.OrderId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.OrderId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a> |
-                </td>
+                <th>Order ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Car Brand</th>
+                <th>Car Model</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.ActiveOrders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@order.EndDate.ToString("yyyy-MM-dd")</td>
+                    <td>@order.Car.Brand</td>
+                    <td>@order.Car.Model</td>
+                    <td>
+                        <div>
+                            <a asp-page="/Orders/Delete" asp-route-id="@order.OrderId" asp-route-carId="@order.Car.CarId" asp-route-userId="@HttpContext.Session.GetInt32("UserId")">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Past orders:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Car Brand</th>
+                <th>Car Model</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.PastOrders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@order.EndDate.ToString("yyyy-MM-dd")</td>
+                    <td>@order.Car.Brand</td>
+                    <td>@order.Car.Model</td>
+                </tr>
+            }
+    </table>
+}
+else
+{
+    <p>No orders found for this user.</p>
+}
+

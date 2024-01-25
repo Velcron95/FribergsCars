@@ -22,7 +22,10 @@ namespace FribergsCars.Data.Repositorys
 
         public Order GetById(int id)
         {
-            return applicationDbContext.Order.Include(x => x.User).Include(s => s.Car).FirstOrDefault(o => o.OrderId == id);
+            return applicationDbContext.Order
+                .Include(o => o.User)
+                .Include(o => o.Car)
+                .FirstOrDefault(o => o.OrderId == id);
         }
 
         public void Add(Order order)
@@ -63,7 +66,50 @@ namespace FribergsCars.Data.Repositorys
 
             return orderViewModels;
         }
+        public List<Order> GetOrdersByUserId(int userId)
+        {
+            return applicationDbContext.Order
+        .Include(o => o.User)
+        .Include(o => o.Car)
+        .Where(o => o.UserId == userId)
+        .ToList();
+        }
+        public async Task<Order> GetByIdAsync(int id)
+        {
+            return await applicationDbContext.Order.FindAsync(id);
+        }
+        public IEnumerable<Order> GetActiveOrders(string userEmail)
+        {
+            return applicationDbContext.Order
+            .Include(o => o.Car)
+            .Include(c => c.User)
+            .Where(o => o.User.Email == userEmail && o.IsActive)
+            .ToList();
+        }
+        public IEnumerable<Order> GetPastOrders(string userEmail)
+        {
+            return applicationDbContext.Order
+                .Include(o => o.Car)
+                .Where(o => o.User.Email == userEmail && !o.IsActive)
+                .ToList();
+        }
 
+        public IEnumerable<Order> AdminGetActiveOrders()
+        {
+            return applicationDbContext.Order
+            .Include(o => o.Car)
+            .Include(c => c.User)
+            .Where(o => o.IsActive)
+            .ToList();
+        }
 
+        public IEnumerable<Order> AdminGetInactiveOrders()
+        {
+            return applicationDbContext.Order
+            .Include(o => o.Car)
+            .Include(c => c.User)
+            .Where(o => !o.IsActive)
+            .ToList();
+        }
     }
 }

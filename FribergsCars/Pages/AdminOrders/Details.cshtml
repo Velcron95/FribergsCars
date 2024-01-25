@@ -1,6 +1,5 @@
 ﻿@page
-@model FribergsCars.Pages.Orders.DetailsModel
-
+@model FribergsCars.Pages.AdminOrders.DetailsModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -37,11 +36,11 @@
             @Model.Order.User.Email
         </dd>
 
-
+        
     </dl>
 </div>
 
 <p>
-    
+    <a asp-page="./Edit" asp-route-id="@Model.Order.OrderId">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </p>

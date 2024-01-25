@@ -15,23 +15,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="CarId" class="control-label"></label>
-                <input asp-for="CarId" class="form-control" readonly />
-                <span asp-validation-for="CarId" class="text-danger"></span>
+                <label asp-for="Model.CarId" class="control-label"></label>
+                <input asp-for="Model.CarId" class="form-control" readonly />
+                <span asp-validation-for="Model.CarId" class="text-danger"></span>
             </div>
 
 
 
             <div class="form-group">
-                @Html.LabelFor(model => model.StartDate)
-                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", type = "date" })
-                @Html.ValidationMessageFor(model => model.StartDate)
+                @Html.LabelFor(model => model.Model.StartDate)
+                @Html.TextBoxFor(model => model.Model.StartDate, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.Model.StartDate)
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.EndDate)
-                @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", type = "date" })
-                @Html.ValidationMessageFor(model => model.EndDate)
+                @Html.LabelFor(model => model.Model.EndDate)
+                @Html.TextBoxFor(model => model.Model.EndDate, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.Model.EndDate)
             </div>
 
 

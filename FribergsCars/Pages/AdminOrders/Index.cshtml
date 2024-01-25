@@ -1,0 +1,80 @@
+﻿@page
+@model FribergsCars.Pages.AdminOrders.IndexModel
+@{
+    ViewData["Title"] = "Admin Orders";
+}
+
+<h1>Admin Orders</h1>
+
+@if (Model.ActiveOrders != null && Model.ActiveOrders.Any())
+{
+    <h2>Active Orders</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User Email</th>
+                <th>Car Brand</th>
+                <th>Car Model</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.ActiveOrders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.User.Email</td>
+                    <td>@order.Car.Brand</td>
+                    <td>@order.Car.Model</td>
+                    <td>@order.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@order.EndDate.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        
+                        <a asp-page="/AdminOrders/Delete" asp-route-id="@order.OrderId" asp-route-carId="@order.Car.CarId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No active orders found.</p>
+}
+
+@if (Model.InactiveOrders != null && Model.InactiveOrders.Any())
+{
+    <h2>Inactive Orders</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User Email</th>
+                <th>Car Brand</th>
+                <th>Car Model</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.InactiveOrders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.User.Email</td>
+                    <td>@order.Car.Brand</td>
+                    <td>@order.Car.Model</td>
+                    <td>@order.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@order.EndDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No inactive orders found.</p>
+}

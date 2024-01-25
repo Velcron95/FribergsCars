@@ -1,5 +1,5 @@
 ﻿@page
-@model FribergsCars.Pages.Cars.IndexModel
+@model FribergsCars.Pages.AdminCars.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -7,21 +7,23 @@
 
 <h1>Index</h1>
 
-
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Brand
+                @Html.DisplayNameFor(model => model.Car[0].Brand)
             </th>
             <th>
-                Model
+                @Html.DisplayNameFor(model => model.Car[0].Model)
             </th>
             <th>
-                Description
+                @Html.DisplayNameFor(model => model.Car[0].Description)
             </th>
             <th>
-                Available
+                @Html.DisplayNameFor(model => model.Car[0].Available)
             </th>
             <th></th>
         </tr>
@@ -42,14 +44,10 @@
                 @Html.DisplayFor(modelItem => item.Available)
             </td>
             <td>
-                
+                <a asp-page="./Edit" asp-route-id="@item.CarId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.CarId">Details</a> |
-                
+                <a asp-page="./Delete" asp-route-id="@item.CarId">Delete</a>
             </td>
-                <td>
-                    <a asp-page="/Orders/Create" asp-route-id="@item.CarId">Rent this car</a>
-
-                </td>
         </tr>
 }
     </tbody>

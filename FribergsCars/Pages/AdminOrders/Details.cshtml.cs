@@ -8,8 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using FribergsCars.Data;
 using FribergsCars.Data.Models;
 using FribergsCars.Data.Interfaces;
+using FribergsCars.Data.Repositorys;
 
-namespace FribergsCars.Pages.Orders
+namespace FribergsCars.Pages.AdminOrders
 {
     public class DetailsModel : PageModel
     {
@@ -35,11 +36,12 @@ namespace FribergsCars.Pages.Orders
                 return NotFound();
             }
 
-
+            
             Order.Car = carRep.GetById(Order.CarId);
             Order.User = userRep.GetById(Order.UserId);
 
             return Page();
         }
+
     }
 }

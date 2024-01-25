@@ -1,0 +1,42 @@
+﻿@page
+@model FribergsCars.Pages.AdminOrders.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit Order</h2>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Order.OrderId" />
+
+    <div class="form-group">
+        <label asp-for="Order.StartDate"></label>
+        <input asp-for="Order.StartDate" class="form-control" />
+        <span asp-validation-for="Order.StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Order.EndDate"></label>
+        <input asp-for="Order.EndDate" class="form-control" />
+        <span asp-validation-for="Order.EndDate" class="text-danger"></span>
+    </div>
+
+    
+    <div class="form-group">
+        <label asp-for="Order.CarId"></label>
+        <input asp-for="Order.CarId" class="form-control" />
+        <span asp-validation-for="Order.CarId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Order.UserId"></label>
+        <input asp-for="Order.UserId" class="form-control" />
+        <span asp-validation-for="Order.UserId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+

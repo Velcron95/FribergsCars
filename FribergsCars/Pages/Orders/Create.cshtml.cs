@@ -17,10 +17,9 @@ namespace FribergsCars.Pages.Orders
         private readonly IUser userRep;
         private readonly ICar carRep;
 
-        public int CarId { get; set; }
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
-
+        [BindProperty]
+        public OrderCreateVM Model { get; set; }
+  
 
         public CreateModel(IOrder orderRep, IUser userRep, ICar carRep)
         {
@@ -29,70 +28,70 @@ namespace FribergsCars.Pages.Orders
             this.carRep = carRep;
         }
 
-        public IActionResult OnGet(int carId)
+        public IActionResult OnGet()
         {
-            var currentUserId = HttpContext.Session.GetInt32("UserId");
-
-
-
+            var currentUserId = HttpContext.Session.GetString("Email");
             if (currentUserId != null)
             {
-
-                var car = carRep.GetById(carId);
-                var orderCreateVM = new OrderCreateVM(carId);
+                Model = new OrderCreateVM();
+                if (int.TryParse(Request.Query["id"], out int id))
+                {
+                    Model.CarId = id;
+                }
+                else
+                {
+                    return RedirectToPage("/Error");
+                }
 
                 return Page();
             }
-
             return RedirectToPage("/Users/Login");
         }
-    
 
-        
-
-        
-        public IActionResult OnPost(OrderCreateVM orderCreateVM)
+        public IActionResult OnPost()
         {
-             int currentUserId = HttpContext.Session.GetInt32("UserId") ?? throw new Exception("User Id Null");
-            
+            int currentUserId = HttpContext.Session.GetInt32("UserId") ?? throw new Exception("User Id Null");
 
-            if (currentUserId != null)
+            if (currentUserId != 0)
             {
-                    if (ModelState.IsValid)
+                try
+                {
+                    var car = carRep.GetById(Model.CarId);
+                    var user = userRep.GetById(currentUserId);
+
+                    if (car != null && user != null)
                     {
-                        try
+                        var order = new Order
                         {
-                            var car = carRep.GetById(orderCreateVM.CarId);
-                            var user = userRep.GetById(currentUserId); 
-                            var order = new Order
-                            {
-                                Car = car,
-                                User = user,
-                                StartDate = orderCreateVM.StartDate,
-                                EndDate = orderCreateVM.EndDate
-                            };
+                            Car = car,
+                            User = user,
+                            StartDate = Model.StartDate,
+                            EndDate = Model.EndDate,
+                            IsActive = true
+                        };
 
-                            orderRep.Add(order);
+                        orderRep.Add(order);
 
-                            return RedirectToAction("DisplayOrders");
-                        }
-                        catch (Exception ex)
-                        {
-                           
-                            return RedirectToAction("Error");
-                        }
+                        // Assuming that the 'Available' property is boolean
+                        car.Available = false;
+                        carRep.Update(car);
+
+                        return RedirectToPage("/Orders/Index");
                     }
-
-     
-                    
-                
-
-                
-                return RedirectToAction("Login", "User");
+                    else
+                    {
+                        // Handle the case when car or user is not found
+                        return RedirectToPage("/Error");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log or handle the exception
+                    return RedirectToPage("/Error");
+                }
             }
-
-            
-            return RedirectToAction("Login", "User");
+            return RedirectToPage("/Users/Login");
         }
     }
+
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿// IndexModel.cshtml.cs
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,68 +24,24 @@ namespace FribergsCars.Pages.Orders
             this.userRep = userRep;
             this.carRep = carRep;
         }
-        public List<Order> Orders { get; set; }
 
-        public IActionResult OnPost(int carId)
+        public IEnumerable<Order> ActiveOrders { get; private set; }
+        public IEnumerable<Order> PastOrders { get; private set; }
+
+        public void OnGet()
         {
-            var currentUserId = HttpContext.Session.GetInt32("UserId");
-
-
-
-            if (currentUserId != null)
+            string user = HttpContext.Session.GetString("Email");
+            if (ModelState.IsValid)
             {
-
-                var car = carRep.GetById(carId);
-                var orderCreateVM = new OrderCreateVM(carId);
-                return Page();
-                
+                ActiveOrders = orderRep.GetActiveOrders(user);
+                PastOrders = orderRep.GetPastOrders(user);
             }
-
-            return RedirectToPage("/Users/Login");
+            else
+            {
+                RedirectToPage("/Index");
+            }
         }
 
-        public IActionResult OnGet(OrderCreateVM orderCreateVM)
-        {
-            int currentUserId = HttpContext.Session.GetInt32("UserId") ?? throw new Exception("User Id Null");
-            if (currentUserId != null)
-            {
-                if (ModelState.IsValid)
-                {
-                    try
-                    {
-                        var car = carRep.GetById(orderCreateVM.CarId);
-                        var user = userRep.GetById(currentUserId);
-                        var order = new Order
-                        {
-                            Car = car,
-                            User = user,
-                            StartDate = orderCreateVM.StartDate,
-                            EndDate = orderCreateVM.EndDate
-                        };
-
-                        orderRep.Add(order);
-
-                        return RedirectToPage("/Index");
-                    }
-                    catch (Exception ex)
-                    {
-
-                        return RedirectToAction("Error");
-                    }
-                }
-
-
-
-
-
-
-                return RedirectToAction("Login", "User");
-            }
-
-
-            return RedirectToAction("Login", "User");
-        }
 
     }
 }
-
