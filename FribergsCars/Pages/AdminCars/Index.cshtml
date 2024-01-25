@@ -1,5 +1,6 @@
 ﻿@page
 @model FribergsCars.Pages.AdminCars.IndexModel
+@using System.IO
 
 @{
     ViewData["Title"] = "Index";
@@ -25,30 +26,39 @@
             <th>
                 @Html.DisplayNameFor(model => model.Car[0].Available)
             </th>
+            <th>
+                Image
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Car) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Available)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.CarId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.CarId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CarId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Car) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Available)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.ImagePath)" alt="Car Image" class="img-fluid" style="width: 100px; height: auto;" />
+                </td>
+
+
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.CarId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.CarId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.CarId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

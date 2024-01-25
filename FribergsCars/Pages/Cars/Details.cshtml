@@ -35,7 +35,20 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Car.Available)
         </dd>
+
     </dl>
+</div>
+<div class="col-sm-6">
+    <h4>Car Image</h4>
+    <hr />
+    @if (!string.IsNullOrEmpty(Model.Car.ImagePath))
+    {
+        <img src="@Url.Content(Model.Car.ImagePath)" alt="Car Image" class="img-fluid" style="max-width: 500px; max-height: auto;" />
+    }
+    else
+    {
+        <p>No image available</p>
+    }
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Car.CarId">Edit</a> |

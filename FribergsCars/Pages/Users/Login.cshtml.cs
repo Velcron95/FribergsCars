@@ -3,6 +3,7 @@ using FribergsCars.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace FribergsCars.Pages.Users
@@ -12,9 +13,12 @@ namespace FribergsCars.Pages.Users
         private readonly ApplicationDbContext applicationDbContext;
 
         [BindProperty]
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email format.")]
         public string Email { get; set; }
 
         [BindProperty]
+        
         public string Password { get; set; }
 
         public LoginModel(ApplicationDbContext applicationDbContext)

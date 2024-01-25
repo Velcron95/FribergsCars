@@ -41,9 +41,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Available)
             </td>
+                <td>
+                    <img src="@Url.Content(item.ImagePath)" alt="Car Image" class="img-fluid" style="width: 100px; height: auto;" />
+                </td>
+
             <td>
                 
-                <a asp-page="./Details" asp-route-id="@item.CarId">Details</a> |
+                <a asp-page="./Details" asp-route-id="@item.CarId">Details</a> 
                 
             </td>
                 <td>

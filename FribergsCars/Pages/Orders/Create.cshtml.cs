@@ -72,21 +72,25 @@ namespace FribergsCars.Pages.Orders
 
                         orderRep.Add(order);
 
-                        // Assuming that the 'Available' property is boolean
+                        
                         car.Available = false;
                         carRep.Update(car);
 
+                        TempData["SuccessMessage"] = "Order created successfully!";
+
                         return RedirectToPage("/Orders/Index");
+
+                        
                     }
                     else
                     {
-                        // Handle the case when car or user is not found
+                       
                         return RedirectToPage("/Error");
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Log or handle the exception
+                    
                     return RedirectToPage("/Error");
                 }
             }

@@ -2,6 +2,7 @@ using FribergsCars.Data.Interfaces;
 using FribergsCars.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace FribergsCars.Pages.Users
 {
@@ -13,7 +14,8 @@ namespace FribergsCars.Pages.Users
         {
             this.userRep = userRep;
         }
-        
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email format.")]
         public string Email { get; set; }
         public string Password { get; set; }
         public ActionResult OnGet()
