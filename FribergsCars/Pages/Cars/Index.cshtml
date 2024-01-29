@@ -20,9 +20,7 @@
             <th>
                 Description
             </th>
-            <th>
-                Available
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -38,9 +36,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Available)
-            </td>
+            
                 <td>
                     <img src="@Url.Content(item.ImagePath)" alt="Car Image" class="img-fluid" style="width: 100px; height: auto;" />
                 </td>
@@ -51,7 +47,14 @@
                 
             </td>
                 <td>
-                    <a asp-page="/Orders/Create" asp-route-id="@item.CarId">Rent this car</a>
+                    @if(item.Available == true)
+                    {
+                        <a asp-page="/Orders/Create" asp-route-id="@item.CarId">Rent this car</a>
+                    }
+                    else
+                    {
+                        <span style="color: red;">Not Available</span>
+                    }
 
                 </td>
         </tr>

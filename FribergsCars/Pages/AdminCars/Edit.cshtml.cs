@@ -42,7 +42,20 @@ namespace FribergsCars.Pages.AdminCars
                 return Page();
             }
 
-            carRepository.Update(Car);
+            
+            Car currentCar = carRepository.GetById(Car.CarId);
+
+            
+            currentCar.Brand = Car.Brand;
+            currentCar.Model = Car.Model;
+            currentCar.Description = Car.Description;
+            currentCar.Available = Car.Available;
+
+            
+            currentCar.ImagePath = Car.ImagePath ?? currentCar.ImagePath;
+
+            
+            carRepository.Update(currentCar);
 
             return RedirectToPage("./Index");
         }
