@@ -1,10 +1,20 @@
 ﻿@page
-@model IndexModel
+@model FribergsCars.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
+<link rel="stylesheet" href="~/css/Home.css" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<header>
+    <h1>Friberg's Car Rental</h1>
+</header>
+
+<main>
+    <p>Welcome to Friberg's Car Rental, your trusted partner for car rentals.</p>
+    <img src="/Images/Friberg.png" alt="Friberg's Car Rental Logo" class="car-image">
+    <p>
+        Explore our diverse fleet of vehicles and enjoy a seamless rental experience.
+        <br />
+        If you don't have an account yet, <span class="create-account-text">create an account</span> or <span class="create-account-text">login</span> now.
+    </p>
+</main>

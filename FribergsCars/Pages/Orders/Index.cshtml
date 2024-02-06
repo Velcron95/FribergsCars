@@ -2,8 +2,8 @@
 @using FribergsCars.Data.Models
 @model FribergsCars.Pages.Orders.IndexModel
 
-<h1>Index</h1>
-
+<h1>My Orders</h1>
+<link rel="stylesheet" href="~/css/UserOrderView.css" />
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -22,71 +22,78 @@
 
 @if (Model != null)
 {
-    <div>
-        <h2>Active orders:</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Car Brand</th>
-                    <th>Car Model</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var order in Model.ActiveOrders)
-                {
+    <div class="orderContainer">
+        <div class="activeOrder">
+            <h2>Active orders:</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td>@order.OrderId</td>
-                        <td>@order.StartDate.ToString("yyyy-MM-dd")</td>
-                        <td>@order.EndDate.ToString("yyyy-MM-dd")</td>
-                        <td>@order.Car.Brand</td>
-                        <td>@order.Car.Model</td>
-                        <td>
-                            <img src="@Url.Content(order.Car.ImagePath)" alt="Car Image" class="img-fluid" style="max-width: 100px; max-height: 100px;" />
-                        </td>
-                        <td>
-                            <div>
-                                <a asp-page="/Orders/Delete" asp-route-id="@order.OrderId" asp-route-carId="@order.Car.CarId" asp-route-userId="@HttpContext.Session.GetInt32("UserId")">Delete</a>
-                            </div>
-                        </td>
+                        <th>Order ID</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Car Brand</th>
+                        <th>Car Model</th>
+                        <th>Image</th>
+                        <th>Action</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.ActiveOrders)
+                    {
+                        <tr>
+                            <td>@order.OrderId</td>
+                            <td>@order.StartDate.ToString("yyyy-MM-dd")</td>
+                            <td>@order.EndDate.ToString("yyyy-MM-dd")</td>
+                            <td>@order.Car.Brand</td>
+                            <td>@order.Car.Model</td>
+                            <td>
+                                <img src="@Url.Content(order.Car.ImagePath)" alt="Car Image" class="img-fluid" style="max-width: 100px; max-height: 100px;" />
+                            </td>
+                            <td>
+                                <div>
+                                    <a asp-page="/Orders/Delete" asp-route-id="@order.OrderId" asp-route-carId="@order.Car.CarId" asp-route-userId="@HttpContext.Session.GetInt32("UserId")">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
 
-        <h2>Past orders:</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Car Brand</th>
-                    <th>Car Model</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var order in Model.PastOrders)
-                {
+       <div class="pastOrder">
+            <h2>Past orders:</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td>@order.OrderId</td>
-                        <td>@order.StartDate.ToString("yyyy-MM-dd")</td>
-                        <td>@order.EndDate.ToString("yyyy-MM-dd")</td>
-                        <td>@order.Car.Brand</td>
-                        <td>@order.Car.Model</td>
-                        <td>
-                            <img src="@Url.Content(order.Car.ImagePath)" alt="Car Image" class="img-fluid" style="max-width: 100px; max-height: 100px;" />
-                        </td>
+                        <th>Order ID</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Car Brand</th>
+                        <th>Car Model</th>
+                        <th>Image</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.PastOrders)
+                    {
+                        <tr>
+                            <td>@order.OrderId</td>
+                            <td>@order.StartDate.ToString("yyyy-MM-dd")</td>
+                            <td>@order.EndDate.ToString("yyyy-MM-dd")</td>
+                            <td>@order.Car.Brand</td>
+                            <td>@order.Car.Model</td>
+                            <td>
+                                <img src="@Url.Content(order.Car.ImagePath)" alt="Car Image" class="img-fluid" style="max-width: 100px; max-height: 100px;" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+       </div>
     </div>
 }
 else
 {
-    <p>No orders found for this user.</p>
+    <p class="else">No orders found for this user.</p>
 }

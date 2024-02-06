@@ -9,9 +9,9 @@ namespace FribergsCars.Data.Interfaces
         void Add(Order order);
         void Update(Order order);
         void Delete(Order order);
-        IEnumerable<OrderViewModel> DisplayOrders(string user);
-        List<Order> GetOrdersByUserId(int userId);
-        Task<Order> GetByIdAsync(int id);
+        
+        
+        
         public IEnumerable<Order> GetActiveOrders(string userEmail);
         public IEnumerable<Order> GetPastOrders(string userEmail);
         IEnumerable<Order> AdminGetActiveOrders();

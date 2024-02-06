@@ -8,9 +8,7 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+
 
 html {
   position: relative;
@@ -21,6 +19,65 @@ body {
   margin-bottom: 60px;
   
 }
-.kim{
-    color: black;
+h1, h4 {
+    text-align: center;
 }
+.navbarContainer {
+    display: flex;
+    margin-top: 0;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1rem;
+    color: black;
+    padding: 1rem; 
+    background-color: #ffffff; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+    .navbarContainer img {
+        margin-right: 10px;
+    }
+        .navbarContainer ul {
+        list-style-type: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbarContainer li {
+        margin-right: 4rem; 
+    }
+
+    .navbarContainer a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+    }
+
+        .navbarContainer a:hover {
+            color: blueviolet; 
+        }
+
+    .navbarContainer div {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbarContainer p {
+        margin-right: 3rem; 
+    }
+
+
+    .navbarContainer button {
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #007bff;
+        font-weight: bold;
+        text-decoration: underline;
+        padding: 0;
+    }
+
+    .navbarContainer button:hover {
+            color: blueviolet; 
+        }
+

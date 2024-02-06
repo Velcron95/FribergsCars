@@ -1,37 +1,32 @@
 ﻿@page
 @model FribergsCars.Pages.AdminUsers.DetailsModel
 
-@{
-    ViewData["Title"] = "Details";
+@section styles {
+    <link rel="stylesheet" href="~/css/UserDetails.css" />
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>User</h4>
+
+<div class="details-container">
+    <h1>Details</h1>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User.Password)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User.Password)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User.IsAdmin)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User.IsAdmin)
-        </dd>
-    </dl>
+    <ul class="user-details-list">
+        <li>
+            <span class="label">@Html.DisplayNameFor(model => model.User.Email)</span>
+            <span class="value">@Html.DisplayFor(model => model.User.Email)</span>
+        </li>
+        <li>
+            <span class="label">@Html.DisplayNameFor(model => model.User.Password)</span>
+            <span class="value">@Html.DisplayFor(model => model.User.Password)</span>
+        </li>
+        <li>
+            <span class="label">@Html.DisplayNameFor(model => model.User.IsAdmin)</span>
+            <span class="value">@Html.DisplayFor(model => model.User.IsAdmin)</span>
+        </li>
+        <div class="links-container">
+            <a asp-page="./Edit" asp-route-id="@Model.User.UserId">Edit</a> 
+            <a asp-page="./Index">Back to List</a>
+        </div>
+    </ul>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.User.UserId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+

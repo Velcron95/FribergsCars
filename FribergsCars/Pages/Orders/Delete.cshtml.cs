@@ -8,10 +8,12 @@ namespace FribergsCars.Pages.Orders
     public class DeleteModel : PageModel
     {
         private readonly IOrder orderRep;
+        private readonly ICar carRep;
 
-        public DeleteModel(IOrder orderRep)
+        public DeleteModel(IOrder orderRep, ICar carRep)
         {
             this.orderRep = orderRep;
+            this.carRep = carRep;
         }
 
         [BindProperty]
@@ -45,16 +47,17 @@ namespace FribergsCars.Pages.Orders
                 {
                     
                     Order.IsActive = false;
-
                     
                     orderRep.Update(Order);
+                    Order.Car.Available = true;
+                    carRep.Update(Order.Car);
                 }
 
                 return RedirectToPage("./Index");
             }
             catch (Exception ex)
             {
-                // Handle the exception, log, or display an error message
+                
                 return RedirectToPage("/Error");
             }
         }

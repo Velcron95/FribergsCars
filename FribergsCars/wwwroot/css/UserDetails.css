@@ -1,0 +1,45 @@
+﻿.details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.user-details-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .user-details-list li {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+.label {
+    font-weight: bold;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.value {
+    flex: 2;
+}
+
+.links-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+    .links-container a:hover {
+        background-color: #0056b3;
+    }

@@ -48,36 +48,9 @@ namespace FribergsCars.Data.Repositorys
 
 
 
-        public IEnumerable<OrderViewModel> DisplayOrders(string userEmail)
-        {
-            var orders = applicationDbContext.Order
-                .Include(o => o.Car)
-                .Where(o => o.User.Email == userEmail)
-                .ToList();
-
-            var orderViewModels = orders.Select(o => new OrderViewModel
-            {
-                OrderId = o.OrderId,
-                StartDate = o.StartDate,
-                EndDate = o.EndDate,
-                CarBrand = o.Car.Brand,
-                CarModel = o.Car.Model
-            });
-
-            return orderViewModels;
-        }
-        public List<Order> GetOrdersByUserId(int userId)
-        {
-            return applicationDbContext.Order
-        .Include(o => o.User)
-        .Include(o => o.Car)
-        .Where(o => o.UserId == userId)
-        .ToList();
-        }
-        public async Task<Order> GetByIdAsync(int id)
-        {
-            return await applicationDbContext.Order.FindAsync(id);
-        }
+      
+       
+       
         public IEnumerable<Order> GetActiveOrders(string userEmail)
         {
             return applicationDbContext.Order

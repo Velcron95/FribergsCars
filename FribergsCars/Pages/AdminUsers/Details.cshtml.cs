@@ -15,7 +15,7 @@ namespace FribergsCars.Pages.AdminUsers
             this.userRepository = userRepository;
         }
 
-        public User User { get; set; } = new User(); // Initialize the User object
+        public User User { get; set; } = new User(); 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

@@ -1,0 +1,61 @@
+﻿
+
+.orderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.activeOrder, .pastOrder {
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.img-fluid {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+.else {
+    color: #dc3545;
+}
+
+
+.orderContainer table {
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.orderContainer th, .orderContainer td {
+    min-width: 120px;
+    text-align: center;
+}

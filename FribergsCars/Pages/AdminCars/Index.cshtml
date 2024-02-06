@@ -6,8 +6,9 @@
     ViewData["Title"] = "Index";
 }
 
+<link rel="stylesheet" href="~/css/Car.css" />
 <h1>Index</h1>
-
+<hr />
 <p>
     <a asp-page="Create">Create New</a>
 </p>
@@ -22,6 +23,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Car[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].Price)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Car[0].Available)
@@ -45,8 +49,12 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Price)$/Day
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Available)
                 </td>
+
                 <td>
                     <img src="@Url.Content(item.ImagePath)" alt="Car Image" class="img-fluid" style="width: 100px; height: auto;" />
                 </td>

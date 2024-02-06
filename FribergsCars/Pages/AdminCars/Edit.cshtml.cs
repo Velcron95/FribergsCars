@@ -50,8 +50,9 @@ namespace FribergsCars.Pages.AdminCars
             currentCar.Model = Car.Model;
             currentCar.Description = Car.Description;
             currentCar.Available = Car.Available;
+            currentCar.Price = Car.Price;
 
-            
+
             currentCar.ImagePath = Car.ImagePath ?? currentCar.ImagePath;
 
             

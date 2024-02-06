@@ -51,7 +51,7 @@ namespace FribergsCars.Pages.AdminOrders
             }
             catch (Exception ex)
             {
-                // Handle the exception, log, or display an error message
+                
                 return RedirectToPage("/Error");
             }
         }
